@@ -5,6 +5,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useTheme } from '../context/ThemeContext';
+import CopyButton from './CopyButton';
 import type { ComponentPropsWithoutRef } from 'react';
 
 interface PreviewProps {
@@ -28,7 +29,7 @@ function MarkdownImage({ src, alt }: { src?: string; alt?: string }) {
                 )}
                 {hasError ? (
                     <div className="image-error">
-                        <span className="error-icon">🖼️</span>
+                        <span className="error-icon">!</span>
                         <span>Failed to load image</span>
                     </div>
                 ) : (
@@ -57,6 +58,7 @@ function Preview({ content }: PreviewProps) {
         <div className="preview-container">
             <div className="panel-header">
                 <span className="panel-title">Preview</span>
+                <CopyButton text={content} />
             </div>
             <div className="preview-content markdown-body">
                 <Markdown
