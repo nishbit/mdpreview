@@ -29,6 +29,7 @@ function App() {
     <div className="app">
       <header className="app-header">
         <h1 className="app-title">MD Preview</h1>
+        <Stats content={markdown} />
         <button
           className="theme-toggle"
           onClick={toggleTheme}
@@ -46,7 +47,6 @@ function App() {
         <Editor value={markdown} onChange={setMarkdown} />
         <Preview content={markdown} />
       </main>
-      <Stats content={markdown} />
     </div>
   );
 }
