@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -8,6 +9,45 @@ import type { ComponentPropsWithoutRef } from 'react';
 
 interface PreviewProps {
     content: string;
+}
+
+// Custom Image component with loading state and captions
+function MarkdownImage({ src, alt }: { src?: string; alt?: string }) {
+    const [isLoading, setIsLoading] = useState(true);
+    const [hasError, setHasError] = useState(false);
+
+    if (!src) return null;
+
+    return (
+        <figure className="image-figure">
+            <div className={`image-wrapper ${isLoading ? 'loading' : ''} ${hasError ? 'error' : ''}`}>
+                {isLoading && !hasError && (
+                    <div className="image-skeleton">
+                        <div className="skeleton-shimmer" />
+                    </div>
+                )}
+                {hasError ? (
+                    <div className="image-error">
+                        <span className="error-icon">🖼️</span>
+                        <span>Failed to load image</span>
+                    </div>
+                ) : (
+                    <img
+                        src={src}
+                        alt={alt || ''}
+                        loading="lazy"
+                        onLoad={() => setIsLoading(false)}
+                        onError={() => {
+                            setIsLoading(false);
+                            setHasError(true);
+                        }}
+                        style={{ opacity: isLoading ? 0 : 1 }}
+                    />
+                )}
+            </div>
+            {alt && !hasError && <figcaption className="image-caption">{alt}</figcaption>}
+        </figure>
+    );
 }
 
 function Preview({ content }: PreviewProps) {
@@ -55,6 +95,9 @@ function Preview({ content }: PreviewProps) {
                                 </code>
                             );
                         },
+                        img({ src, alt }) {
+                            return <MarkdownImage src={src} alt={alt} />;
+                        },
                     }}
                 >
                     {content}
@@ -65,3 +108,4 @@ function Preview({ content }: PreviewProps) {
 }
 
 export default Preview;
+
