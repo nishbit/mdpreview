@@ -1,3 +1,6 @@
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+
 interface PreviewProps {
     content: string;
 }
@@ -8,11 +11,10 @@ function Preview({ content }: PreviewProps) {
             <div className="panel-header">
                 <span className="panel-title">Preview</span>
             </div>
-            <div className="preview-content">
-                {/* For now, just render raw text - we'll add markdown parsing later */}
-                <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
-                    {content || 'Preview will appear here...'}
-                </pre>
+            <div className="preview-content markdown-body">
+                <Markdown remarkPlugins={[remarkGfm]}>
+                    {content}
+                </Markdown>
             </div>
         </div>
     );
