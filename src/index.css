@@ -1,6 +1,73 @@
 @import "tailwindcss";
 
-/* CSS Reset & Base Styles */
+/* ===== Theme CSS Variables ===== */
+
+/* Dark Theme (default) */
+:root,
+[data-theme="dark"] {
+  --color-bg-primary: #11111b;
+  --color-bg-secondary: #181825;
+  --color-bg-tertiary: #1e1e2e;
+  --color-bg-elevated: rgba(255, 255, 255, 0.05);
+
+  --color-text-primary: #cdd6f4;
+  --color-text-secondary: rgba(205, 214, 244, 0.7);
+  --color-text-muted: rgba(205, 214, 244, 0.4);
+  --color-text-heading: #f5f5f5;
+
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-hover: rgba(255, 255, 255, 0.2);
+
+  --color-accent: #667eea;
+  --color-accent-secondary: #764ba2;
+  --color-link: #89b4fa;
+
+  --color-scrollbar: rgba(255, 255, 255, 0.15);
+  --color-scrollbar-hover: rgba(255, 255, 255, 0.25);
+
+  --color-selection-bg: rgba(102, 126, 234, 0.4);
+  --color-selection-text: #fff;
+
+  --color-blockquote-border: #89b4fa;
+  --color-blockquote-bg: rgba(137, 180, 250, 0.1);
+
+  --color-code-bg: rgba(255, 255, 255, 0.1);
+  --color-pre-bg: #1e1e2e;
+}
+
+/* Light Theme */
+[data-theme="light"] {
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8f9fa;
+  --color-bg-tertiary: #f1f3f4;
+  --color-bg-elevated: rgba(0, 0, 0, 0.03);
+
+  --color-text-primary: #1a1a2e;
+  --color-text-secondary: rgba(26, 26, 46, 0.7);
+  --color-text-muted: rgba(26, 26, 46, 0.4);
+  --color-text-heading: #0f0f1a;
+
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-border-hover: rgba(0, 0, 0, 0.2);
+
+  --color-accent: #5a67d8;
+  --color-accent-secondary: #6b46c1;
+  --color-link: #4f46e5;
+
+  --color-scrollbar: rgba(0, 0, 0, 0.15);
+  --color-scrollbar-hover: rgba(0, 0, 0, 0.25);
+
+  --color-selection-bg: rgba(90, 103, 216, 0.3);
+  --color-selection-text: #0f0f1a;
+
+  --color-blockquote-border: #5a67d8;
+  --color-blockquote-bg: rgba(90, 103, 216, 0.08);
+
+  --color-code-bg: rgba(0, 0, 0, 0.06);
+  --color-pre-bg: #f1f3f4;
+}
+
+/* ===== CSS Reset & Base Styles ===== */
 *,
 *::before,
 *::after {
@@ -22,8 +89,9 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #11111b;
-  color: #cdd6f4;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #root {
@@ -32,6 +100,6 @@ body {
 
 /* Selection styling */
 ::selection {
-  background: rgba(102, 126, 234, 0.4);
-  color: #fff;
+  background: var(--color-selection-bg);
+  color: var(--color-selection-text);
 }
