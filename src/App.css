@@ -94,8 +94,8 @@
   flex: 1;
   width: 100%;
   padding: 1.25rem;
-  background: var(--color-bg-tertiary);
-  color: var(--color-text-primary);
+  background: var(--color-editor-bg);
+  color: var(--color-editor-text);
   border: none;
   outline: none;
   resize: none;
@@ -104,19 +104,20 @@
   line-height: 1.6;
   tab-size: 2;
   transition: background-color 0.3s ease, color 0.3s ease;
+  caret-color: var(--color-accent);
 }
 
 .editor-textarea::placeholder {
-  color: var(--color-text-muted);
+  color: var(--color-editor-placeholder);
 }
 
 /* Preview Styles */
 .preview-content {
   flex: 1;
   padding: 1.25rem;
-  background: var(--color-bg-secondary);
+  background: var(--color-preview-bg);
   overflow-y: auto;
-  color: var(--color-text-primary);
+  color: var(--color-preview-text);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -241,8 +242,10 @@
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   font-size: 0.875em;
   background: var(--color-code-bg);
+  color: var(--color-code-text);
   padding: 0.2em 0.4em;
   border-radius: 4px;
+  border: 1px solid var(--color-border);
 }
 
 .markdown-body pre {
@@ -251,13 +254,16 @@
   border-radius: 8px;
   overflow-x: auto;
   margin: 1em 0;
+  border: 1px solid var(--color-border);
 }
 
 .markdown-body pre code {
   background: none;
+  color: inherit;
   padding: 0;
   font-size: 0.9em;
   line-height: 1.5;
+  border: none;
 }
 
 .markdown-body ul,
