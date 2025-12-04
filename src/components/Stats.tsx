@@ -4,6 +4,10 @@ interface StatsProps {
     content: string;
 }
 
+// Reading speed constants (words per minute)
+const SLOW_WPM = 150;   // Slower readers
+const FAST_WPM = 250;   // Faster readers
+
 // Count words in text
 function countWords(text: string): number {
     const trimmed = text.trim();
@@ -27,6 +31,34 @@ function countParagraphs(text: string): number {
 function countLines(text: string): number {
     if (!text) return 0;
     return text.split('\n').length;
+}
+
+// Calculate reading time range
+function calculateReadingTime(wordCount: number): { min: number; max: number } {
+    const fastTime = Math.ceil(wordCount / FAST_WPM);
+    const slowTime = Math.ceil(wordCount / SLOW_WPM);
+    return { min: fastTime, max: slowTime };
+}
+
+// Format reading time nicely
+function formatReadingTime(wordCount: number): string {
+    if (wordCount === 0) return '0 min';
+
+    const { min, max } = calculateReadingTime(wordCount);
+
+    if (min === max || min === 0) {
+        return `${max} min`;
+    }
+
+    if (min < 1 && max < 1) {
+        return '<1 min';
+    }
+
+    if (min < 1) {
+        return `<1-${max} min`;
+    }
+
+    return `${min}-${max} min`;
 }
 
 // Animated number component
@@ -54,12 +86,16 @@ function AnimatedNumber({ value }: { value: number }) {
 }
 
 function Stats({ content }: StatsProps) {
-    const stats = useMemo(() => ({
-        words: countWords(content),
-        chars: countChars(content),
-        paragraphs: countParagraphs(content),
-        lines: countLines(content),
-    }), [content]);
+    const stats = useMemo(() => {
+        const words = countWords(content);
+        return {
+            words,
+            chars: countChars(content),
+            paragraphs: countParagraphs(content),
+            lines: countLines(content),
+            readingTime: formatReadingTime(words),
+        };
+    }, [content]);
 
     return (
         <div className="stats-bar">
@@ -78,16 +114,9 @@ function Stats({ content }: StatsProps) {
 
                 <span className="stat-divider">|</span>
 
-                <div className="stat-item" title="Paragraphs">
-                    <AnimatedNumber value={stats.paragraphs} />
-                    <span className="stat-label">para</span>
-                </div>
-
-                <span className="stat-divider">|</span>
-
-                <div className="stat-item" title="Lines">
-                    <AnimatedNumber value={stats.lines} />
-                    <span className="stat-label">lines</span>
+                <div className="stat-item" title="Reading time (150-250 WPM)">
+                    <span className="stat-value">{stats.readingTime}</span>
+                    <span className="stat-label">read</span>
                 </div>
             </div>
         </div>
