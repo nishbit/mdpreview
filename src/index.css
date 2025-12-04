@@ -1,108 +1,119 @@
 @import "tailwindcss";
 
 /* ===== Theme CSS Variables ===== */
+/* Deep Teal (#005055) & Ice Blue (#b3fff0) Color Scheme */
 
-/* Dark Theme (default) */
+/* Dark Theme - Deep Teal */
 :root,
 [data-theme="dark"] {
-  /* Background Colors */
-  --color-bg-primary: #0f0f17;
-  --color-bg-secondary: #161622;
-  --color-bg-tertiary: #1c1c2e;
-  --color-bg-elevated: rgba(255, 255, 255, 0.05);
+  /* Background Colors - Deep Teal base */
+  --color-bg-primary: #002a2e;
+  --color-bg-secondary: #003a40;
+  --color-bg-tertiary: #004850;
+  --color-bg-elevated: rgba(179, 255, 240, 0.05);
+
+  /* Header */
+  --color-header-bg: #001f22;
+  --color-header-text: #ffffff;
+  --color-header-accent: linear-gradient(135deg, #005055 0%, #007a70 100%);
 
   /* Editor Specific */
-  --color-editor-bg: #13131f;
-  --color-editor-text: #e4e4ef;
-  --color-editor-placeholder: #5c5c7a;
-  --color-editor-line-number: #4a4a66;
+  --color-editor-bg: #00353a;
+  --color-editor-text: #e0f5f2;
+  --color-editor-placeholder: #5a9a94;
+  --color-editor-line-number: #4a8a84;
 
   /* Preview Specific */
-  --color-preview-bg: #18182a;
-  --color-preview-text: #d8d8e8;
+  --color-preview-bg: #003d44;
+  --color-preview-text: #d5f0ed;
 
-  /* Text Colors - Enhanced Contrast */
-  --color-text-primary: #e8e8f0;
-  --color-text-secondary: #a8a8c0;
-  --color-text-muted: #6e6e8a;
+  /* Text Colors */
+  --color-text-primary: #e5f8f6;
+  --color-text-secondary: #9dd4ce;
+  --color-text-muted: #6aada5;
   --color-text-heading: #ffffff;
 
   /* Borders */
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-hover: rgba(255, 255, 255, 0.15);
+  --color-border: rgba(179, 255, 240, 0.12);
+  --color-border-hover: rgba(179, 255, 240, 0.22);
 
-  /* Accents */
-  --color-accent: #667eea;
-  --color-accent-secondary: #764ba2;
-  --color-link: #7cb7ff;
+  /* Accents - Ice Blue */
+  --color-accent: #5ce0d0;
+  --color-accent-secondary: #00a89d;
+  --color-link: #7eeee2;
 
   /* Scrollbar */
-  --color-scrollbar: rgba(255, 255, 255, 0.12);
-  --color-scrollbar-hover: rgba(255, 255, 255, 0.22);
+  --color-scrollbar: rgba(179, 255, 240, 0.15);
+  --color-scrollbar-hover: rgba(179, 255, 240, 0.28);
 
   /* Selection */
-  --color-selection-bg: rgba(102, 126, 234, 0.4);
+  --color-selection-bg: rgba(92, 224, 208, 0.35);
   --color-selection-text: #fff;
 
   /* Blockquote */
-  --color-blockquote-border: #7cb7ff;
-  --color-blockquote-bg: rgba(124, 183, 255, 0.08);
+  --color-blockquote-border: #5ce0d0;
+  --color-blockquote-bg: rgba(92, 224, 208, 0.1);
 
   /* Code */
-  --color-code-bg: rgba(255, 255, 255, 0.08);
-  --color-code-text: #f0b4e4;
-  --color-pre-bg: #0f0f17;
+  --color-code-bg: rgba(179, 255, 240, 0.1);
+  --color-code-text: #7eeee2;
+  --color-pre-bg: #002a2e;
 }
 
-/* Light Theme - High Contrast */
+/* Light Theme - Ice Blue */
 [data-theme="light"] {
-  /* Background Colors */
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f5f6f8;
-  --color-bg-tertiary: #ebedf0;
-  --color-bg-elevated: rgba(0, 0, 0, 0.02);
+  /* Background Colors - Ice Blue base */
+  --color-bg-primary: #e8fffc;
+  --color-bg-secondary: #d5fcf7;
+  --color-bg-tertiary: #c2f9f2;
+  --color-bg-elevated: rgba(0, 80, 85, 0.04);
+
+  /* Header */
+  --color-header-bg: #b3fff0;
+  --color-header-text: #002a2e;
+  --color-header-accent: linear-gradient(135deg, #7eeee2 0%, #5ce0d0 100%);
 
   /* Editor Specific */
-  --color-editor-bg: #fafbfc;
-  --color-editor-text: #24292f;
-  --color-editor-placeholder: #8b949e;
-  --color-editor-line-number: #8b949e;
+  --color-editor-bg: #dffdf9;
+  --color-editor-text: #00393d;
+  --color-editor-placeholder: #5a9a94;
+  --color-editor-line-number: #6aada5;
 
   /* Preview Specific */
-  --color-preview-bg: #ffffff;
-  --color-preview-text: #1f2328;
+  --color-preview-bg: #e8fffc;
+  --color-preview-text: #00353a;
 
-  /* Text Colors - High Contrast */
-  --color-text-primary: #1f2328;
-  --color-text-secondary: #57606a;
-  --color-text-muted: #8b949e;
-  --color-text-heading: #0d1117;
+  /* Text Colors */
+  --color-text-primary: #003d44;
+  --color-text-secondary: #006066;
+  --color-text-muted: #4a8a84;
+  --color-text-heading: #002a2e;
 
   /* Borders */
-  --color-border: rgba(0, 0, 0, 0.1);
-  --color-border-hover: rgba(0, 0, 0, 0.18);
+  --color-border: rgba(0, 80, 85, 0.15);
+  --color-border-hover: rgba(0, 80, 85, 0.25);
 
-  /* Accents */
-  --color-accent: #5a67d8;
-  --color-accent-secondary: #6b46c1;
-  --color-link: #0969da;
+  /* Accents - Deep Teal */
+  --color-accent: #007a82;
+  --color-accent-secondary: #005055;
+  --color-link: #006068;
 
   /* Scrollbar */
-  --color-scrollbar: rgba(0, 0, 0, 0.12);
-  --color-scrollbar-hover: rgba(0, 0, 0, 0.22);
+  --color-scrollbar: rgba(0, 80, 85, 0.18);
+  --color-scrollbar-hover: rgba(0, 80, 85, 0.30);
 
   /* Selection */
-  --color-selection-bg: rgba(90, 103, 216, 0.25);
-  --color-selection-text: #0d1117;
+  --color-selection-bg: rgba(0, 128, 136, 0.25);
+  --color-selection-text: #002a2e;
 
   /* Blockquote */
-  --color-blockquote-border: #0969da;
-  --color-blockquote-bg: rgba(9, 105, 218, 0.06);
+  --color-blockquote-border: #007a82;
+  --color-blockquote-bg: rgba(0, 122, 130, 0.08);
 
   /* Code */
-  --color-code-bg: rgba(0, 0, 0, 0.05);
-  --color-code-text: #cf222e;
-  --color-pre-bg: #f6f8fa;
+  --color-code-bg: rgba(0, 80, 85, 0.08);
+  --color-code-text: #005055;
+  --color-pre-bg: #d5fcf7;
 }
 
 /* ===== CSS Reset & Base Styles ===== */

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Editor from './components/Editor';
 import Preview from './components/Preview';
 import { useTheme } from './context/ThemeContext';
+import ThemeSwitchIcon from './assets/switchtheme.svg';
 import './App.css';
 
 const defaultMarkdown = `# Welcome to MD Preview
@@ -31,8 +32,13 @@ function App() {
           className="theme-toggle"
           onClick={toggleTheme}
           aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          title={`Current: ${theme} theme`}
         >
-          {theme === 'dark' ? '☀️' : '🌙'}
+          <img
+            src={ThemeSwitchIcon}
+            alt="Switch theme"
+            className="theme-toggle-icon"
+          />
         </button>
       </header>
       <main className="app-main">
@@ -44,4 +50,5 @@ function App() {
 }
 
 export default App;
+
 
