@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Editor from './components/Editor';
 import Preview from './components/Preview';
+import Stats from './components/Stats';
 import { useTheme } from './context/ThemeContext';
 import ThemeSwitchIcon from './assets/switchtheme.svg';
 import './App.css';
@@ -45,10 +46,12 @@ function App() {
         <Editor value={markdown} onChange={setMarkdown} />
         <Preview content={markdown} />
       </main>
+      <Stats content={markdown} />
     </div>
   );
 }
 
 export default App;
+
 
 
