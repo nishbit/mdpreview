@@ -1,119 +1,131 @@
 @import "tailwindcss";
 
 /* ===== Theme CSS Variables ===== */
-/* Deep Teal (#005055) & Ice Blue (#b3fff0) Color Scheme */
+/* Elegant Dark (Golden Amber) & Earthy Light (Terracotta) */
 
-/* Dark Theme - Deep Teal */
+/* Dark Theme - Elegant Dark */
 :root,
 [data-theme="dark"] {
-  /* Background Colors - Deep Teal base */
-  --color-bg-primary: #002a2e;
-  --color-bg-secondary: #003a40;
-  --color-bg-tertiary: #004850;
-  --color-bg-elevated: rgba(179, 255, 240, 0.05);
+  /* Background Colors */
+  --color-bg-primary: #121212;
+  --color-bg-secondary: #1a1a1a;
+  --color-bg-tertiary: #1e1e1e;
+  --color-bg-elevated: #222222;
 
   /* Header */
-  --color-header-bg: #001f22;
-  --color-header-text: #ffffff;
-  --color-header-accent: linear-gradient(135deg, #005055 0%, #007a70 100%);
+  --color-header-bg: rgba(18, 18, 18, 0.85);
+  --color-header-text: #e0e0e0;
+  --color-header-accent: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
 
   /* Editor Specific */
-  --color-editor-bg: #00353a;
-  --color-editor-text: #e0f5f2;
-  --color-editor-placeholder: #5a9a94;
-  --color-editor-line-number: #4a8a84;
+  --color-editor-bg: #1a1a1a;
+  --color-editor-text: #e0e0e0;
+  --color-editor-placeholder: #666666;
+  --color-editor-line-number: #555555;
 
   /* Preview Specific */
-  --color-preview-bg: #003d44;
-  --color-preview-text: #d5f0ed;
+  --color-preview-bg: #1a1a1a;
+  --color-preview-text: #e0e0e0;
 
   /* Text Colors */
-  --color-text-primary: #e5f8f6;
-  --color-text-secondary: #9dd4ce;
-  --color-text-muted: #6aada5;
-  --color-text-heading: #ffffff;
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #a0a0a0;
+  --color-text-muted: #666666;
+  --color-text-heading: #f0f0f0;
 
   /* Borders */
-  --color-border: rgba(179, 255, 240, 0.12);
-  --color-border-hover: rgba(179, 255, 240, 0.22);
+  --color-border: #333333;
+  --color-border-hover: #3a3a3a;
 
-  /* Accents - Ice Blue */
-  --color-accent: #5ce0d0;
-  --color-accent-secondary: #00a89d;
-  --color-link: #7eeee2;
+  /* Accents - Golden Amber */
+  --color-accent: #d4a574;
+  --color-accent-secondary: #b8956a;
+  --color-link: #d4a574;
 
   /* Scrollbar */
-  --color-scrollbar: rgba(179, 255, 240, 0.15);
-  --color-scrollbar-hover: rgba(179, 255, 240, 0.28);
+  --color-scrollbar: #333333;
+  --color-scrollbar-hover: #444444;
 
   /* Selection */
-  --color-selection-bg: rgba(92, 224, 208, 0.35);
+  --color-selection-bg: rgba(212, 165, 116, 0.35);
   --color-selection-text: #fff;
 
   /* Blockquote */
-  --color-blockquote-border: #5ce0d0;
-  --color-blockquote-bg: rgba(92, 224, 208, 0.1);
+  --color-blockquote-border: #d4a574;
+  --color-blockquote-bg: rgba(212, 165, 116, 0.08);
 
   /* Code */
-  --color-code-bg: rgba(179, 255, 240, 0.1);
-  --color-code-text: #7eeee2;
-  --color-pre-bg: #002a2e;
+  --color-code-bg: rgba(212, 165, 116, 0.12);
+  --color-code-text: #d4a574;
+  --color-pre-bg: #0a0a0a;
+
+  /* Card & Panel */
+  --color-card-bg: #1a1a1a;
+  --color-card-border: #3a3a3a;
+  --color-card-shadow: #0a0a0a;
+  --color-panel-hover: #222222;
 }
 
-/* Light Theme - Ice Blue */
+/* Light Theme - Earthy Light */
 [data-theme="light"] {
-  /* Background Colors - Ice Blue base */
-  --color-bg-primary: #e8fffc;
-  --color-bg-secondary: #d5fcf7;
-  --color-bg-tertiary: #c2f9f2;
-  --color-bg-elevated: rgba(0, 80, 85, 0.04);
+  /* Background Colors */
+  --color-bg-primary: #faf6f0;
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #f5f0e8;
+  --color-bg-elevated: #ebe4d8;
 
   /* Header */
-  --color-header-bg: #b3fff0;
-  --color-header-text: #002a2e;
-  --color-header-accent: linear-gradient(135deg, #7eeee2 0%, #5ce0d0 100%);
+  --color-header-bg: rgba(245, 235, 224, 0.9);
+  --color-header-text: #2d2418;
+  --color-header-accent: linear-gradient(135deg, #faf6f0 0%, #f5f0e8 100%);
 
   /* Editor Specific */
-  --color-editor-bg: #dffdf9;
-  --color-editor-text: #00393d;
-  --color-editor-placeholder: #5a9a94;
-  --color-editor-line-number: #6aada5;
+  --color-editor-bg: #ffffff;
+  --color-editor-text: #2d2418;
+  --color-editor-placeholder: #a89078;
+  --color-editor-line-number: #b8a078;
 
   /* Preview Specific */
-  --color-preview-bg: #e8fffc;
-  --color-preview-text: #00353a;
+  --color-preview-bg: #ffffff;
+  --color-preview-text: #2d2418;
 
   /* Text Colors */
-  --color-text-primary: #003d44;
-  --color-text-secondary: #006066;
-  --color-text-muted: #4a8a84;
-  --color-text-heading: #002a2e;
+  --color-text-primary: #2d2418;
+  --color-text-secondary: #5a4a38;
+  --color-text-muted: #a89078;
+  --color-text-heading: #1a1208;
 
   /* Borders */
-  --color-border: rgba(0, 80, 85, 0.15);
-  --color-border-hover: rgba(0, 80, 85, 0.25);
+  --color-border: #c9b896;
+  --color-border-hover: #b8a078;
 
-  /* Accents - Deep Teal */
-  --color-accent: #007a82;
-  --color-accent-secondary: #005055;
-  --color-link: #006068;
+  /* Accents - Terracotta */
+  --color-accent: #9e4a32;
+  --color-accent-secondary: #7a3a28;
+  --color-link: #9e4a32;
 
   /* Scrollbar */
-  --color-scrollbar: rgba(0, 80, 85, 0.18);
-  --color-scrollbar-hover: rgba(0, 80, 85, 0.30);
+  --color-scrollbar: #c9b896;
+  --color-scrollbar-hover: #b8a078;
 
   /* Selection */
-  --color-selection-bg: rgba(0, 128, 136, 0.25);
-  --color-selection-text: #002a2e;
+  --color-selection-bg: rgba(158, 74, 50, 0.25);
+  --color-selection-text: #2d2418;
 
   /* Blockquote */
-  --color-blockquote-border: #007a82;
-  --color-blockquote-bg: rgba(0, 122, 130, 0.08);
+  --color-blockquote-border: #9e4a32;
+  --color-blockquote-bg: rgba(158, 74, 50, 0.06);
 
   /* Code */
-  --color-code-bg: rgba(0, 80, 85, 0.08);
-  --color-code-text: #005055;
-  --color-pre-bg: #d5fcf7;
+  --color-code-bg: rgba(158, 74, 50, 0.08);
+  --color-code-text: #9e4a32;
+  --color-pre-bg: #f5f0e8;
+
+  /* Card & Panel */
+  --color-card-bg: #ffffff;
+  --color-card-border: #b8a078;
+  --color-card-shadow: #a89068;
+  --color-panel-hover: #f5f0e8;
 }
 
 /* ===== CSS Reset & Base Styles ===== */
