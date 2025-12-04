@@ -118,10 +118,45 @@
 }
 
 /* ===== Editor Styles ===== */
+.editor-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.line-numbers {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  padding-left: 1rem;
+  padding-right: 0.75rem;
+  background: transparent;
+  border-right: 1px solid var(--color-border);
+  overflow: hidden;
+  user-select: none;
+  text-align: right;
+  min-width: 3rem;
+}
+
+.line-number {
+  font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  height: calc(0.9375rem * 1.7);
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.line-number:hover {
+  opacity: 1;
+}
+
 .editor-textarea {
   flex: 1;
   width: 100%;
   padding: 1.5rem;
+  padding-left: 1rem;
   background: transparent;
   color: var(--color-editor-text);
   border: none;
@@ -133,6 +168,7 @@
   tab-size: 2;
   transition: background-color 0.3s ease, color 0.3s ease;
   caret-color: var(--color-accent);
+  overflow-y: auto;
 }
 
 .editor-textarea::placeholder {

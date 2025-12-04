@@ -8,8 +8,6 @@ interface StatsProps {
 function countWords(text: string): number {
     const trimmed = text.trim();
     if (!trimmed) return 0;
-
-    // Split by whitespace and filter empty strings
     return trimmed.split(/\s+/).filter(word => word.length > 0).length;
 }
 
@@ -23,12 +21,32 @@ function countCharsWithoutSpaces(text: string): number {
     return text.replace(/\s/g, '').length;
 }
 
+// Count paragraphs (blocks separated by blank lines)
+function countParagraphs(text: string): number {
+    const trimmed = text.trim();
+    if (!trimmed) return 0;
+
+    // Split by 2+ newlines (blank line = paragraph separator)
+    const paragraphs = trimmed
+        .split(/\n\s*\n/)
+        .filter(p => p.trim().length > 0);
+
+    return paragraphs.length;
+}
+
+// Count lines (including empty lines)
+function countLines(text: string): number {
+    if (!text) return 0;
+    return text.split('\n').length;
+}
+
 function Stats({ content }: StatsProps) {
-    // Memoize calculations for performance
     const stats = useMemo(() => ({
         words: countWords(content),
-        charsWithSpaces: countCharsWithSpaces(content),
-        charsWithoutSpaces: countCharsWithoutSpaces(content),
+        chars: countCharsWithSpaces(content),
+        charsNoSpaces: countCharsWithoutSpaces(content),
+        paragraphs: countParagraphs(content),
+        lines: countLines(content),
     }), [content]);
 
     return (
@@ -40,13 +58,18 @@ function Stats({ content }: StatsProps) {
                 </div>
                 <div className="stat-divider" />
                 <div className="stat-item">
-                    <span className="stat-value">{stats.charsWithSpaces.toLocaleString()}</span>
-                    <span className="stat-label">characters</span>
+                    <span className="stat-value">{stats.chars.toLocaleString()}</span>
+                    <span className="stat-label">chars</span>
                 </div>
                 <div className="stat-divider" />
                 <div className="stat-item">
-                    <span className="stat-value">{stats.charsWithoutSpaces.toLocaleString()}</span>
-                    <span className="stat-label">no spaces</span>
+                    <span className="stat-value">{stats.paragraphs.toLocaleString()}</span>
+                    <span className="stat-label">paragraphs</span>
+                </div>
+                <div className="stat-divider" />
+                <div className="stat-item">
+                    <span className="stat-value">{stats.lines.toLocaleString()}</span>
+                    <span className="stat-label">lines</span>
                 </div>
             </div>
         </div>
