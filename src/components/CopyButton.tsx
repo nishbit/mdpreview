@@ -123,7 +123,7 @@ function CopyButton({ text }: CopyButtonProps) {
                 className={`copy-button ${copied ? 'copied' : ''}`}
                 onClick={handleClick}
                 onContextMenu={handleContextMenu}
-                title={copied ? `Copied as ${formatLabels[copiedFormat!]}!` : 'Copy (right-click for options)'}
+                title={copied ? `'Tis copied as ${formatLabels[copiedFormat!]}!` : 'Transcribe unto thy clipboard'}
                 aria-label={copied ? 'Copied' : 'Copy markdown'}
             >
                 {copied ? (

@@ -234,7 +234,7 @@ function App() {
           <button
             className={`view-mode-btn ${viewMode === 'editor' ? 'active' : ''}`}
             onClick={() => changeViewMode('editor')}
-            title="Editor only (Ctrl+Shift+E)"
+            title="The Scribe's Chamber — Editor only (Ctrl+Shift+E)"
             aria-label="Editor only"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -247,7 +247,7 @@ function App() {
           <button
             className={`view-mode-btn ${viewMode === 'split' ? 'active' : ''}`}
             onClick={() => changeViewMode('split')}
-            title="Split view (Ctrl+\)"
+            title="Side by Side — Split view (Ctrl+\)"
             aria-label="Split view"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -258,7 +258,7 @@ function App() {
           <button
             className={`view-mode-btn ${viewMode === 'preview' ? 'active' : ''}`}
             onClick={() => changeViewMode('preview')}
-            title="Preview only (Ctrl+Shift+P)"
+            title="The Looking Glass — Preview only (Ctrl+Shift+P)"
             aria-label="Preview only"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -272,7 +272,7 @@ function App() {
         <button
           className={`scroll-sync-toggle ${syncEnabled ? 'active' : ''}`}
           onClick={toggleSync}
-          title={syncEnabled ? 'Scroll sync: ON' : 'Scroll sync: OFF'}
+          title={syncEnabled ? 'Scrolls move in harmony' : 'Scrolls move freely'}
           aria-label={syncEnabled ? 'Disable scroll sync' : 'Enable scroll sync'}
         >
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -285,7 +285,7 @@ function App() {
           className="theme-toggle"
           onClick={toggleTheme}
           aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-          title={`Current: ${theme} theme`}
+          title={theme === 'dark' ? 'Summon the daylight' : 'Embrace the shadows'}
         >
           <img
             src={ThemeSwitchIcon}

@@ -34,7 +34,7 @@ function Editor({ value, onChange }: EditorProps) {
   return (
     <div className="editor-container">
       <div className="panel-header">
-        <span className="panel-title">Editor</span>
+        <span className="panel-title">Scriptorium</span>
       </div>
       <div className="editor-content">
         <div className="line-numbers" ref={lineNumbersRef}>
@@ -48,7 +48,7 @@ function Editor({ value, onChange }: EditorProps) {
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onScroll={handleScroll}
-          placeholder="Write your markdown here..."
+          placeholder="Begin thy writings here..."
           spellCheck={false}
         />
       </div>

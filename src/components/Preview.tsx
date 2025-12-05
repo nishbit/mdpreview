@@ -31,7 +31,7 @@ function CodeCopyButton({ code }: { code: string }) {
         <button
             className={`code-copy-button ${copied ? 'copied' : ''}`}
             onClick={handleCopy}
-            title={copied ? 'Copied!' : 'Copy code'}
+            title={copied ? 'Verily, copied!' : 'Copy this spell'}
         >
             {copied ? (
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -100,7 +100,7 @@ function Preview({ content }: PreviewProps) {
     return (
         <div className="preview-container">
             <div className="panel-header">
-                <span className="panel-title">Preview</span>
+                <span className="panel-title">Looking Glass</span>
                 <CopyButton text={content} />
             </div>
             <div
