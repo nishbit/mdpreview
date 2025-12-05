@@ -557,14 +557,25 @@
   border: 1px solid var(--color-border);
 }
 
-/* Code Block Wrapper with Copy Button */
+/* Code Block with Copy Button */
+/* Remove default pre styles when it contains our custom wrapper */
+.markdown-body pre:has(.code-block-wrapper) {
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 1.5em 0 !important;
+}
+
 .code-block-wrapper {
   position: relative;
-  margin: 1.5em 0;
-  border-radius: 10px;
-  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--color-border);
+  background: var(--color-pre-bg);
 }
 
 .code-block-header {
@@ -574,11 +585,12 @@
   padding: 0.5rem 1rem;
   background: var(--color-bg-tertiary);
   border-bottom: 1px solid var(--color-border);
+  user-select: none;
 }
 
 .code-block-lang {
   font-family: 'Cascadia Code', monospace;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -596,12 +608,15 @@
   border-radius: 4px;
   cursor: pointer;
   color: var(--color-text-muted);
-  transition: all 0.15s ease;
-  opacity: 0.7;
+  transition: all 0.2s ease;
+  opacity: 0.6;
+}
+
+.code-block-wrapper:hover .code-copy-button {
+  opacity: 1;
 }
 
 .code-copy-button:hover {
-  opacity: 1;
   background: var(--color-bg-elevated);
   color: var(--color-text-primary);
 }
@@ -613,23 +628,22 @@
 
 .code-block-wrapper .syntax-highlighter {
   margin: 0 !important;
+  padding: 1em !important;
   border-radius: 0 !important;
   border: none !important;
   box-shadow: none !important;
+  background: transparent !important;
 }
 
-/* Legacy syntax highlighter styles */
-.markdown-body .syntax-highlighter {
-  margin: 1.5em 0 !important;
-  border-radius: 10px !important;
-  border: 1px solid var(--color-border) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+.code-block-wrapper .syntax-highlighter code {
+  background: transparent !important;
 }
 
+/* Standalone pre blocks (fallback) */
 .markdown-body pre {
   background: var(--color-pre-bg);
-  padding: 1.25em;
-  border-radius: 10px;
+  padding: 1em;
+  border-radius: 8px;
   overflow-x: auto;
   margin: 1.5em 0;
   border: 1px solid var(--color-border);
@@ -639,10 +653,10 @@
   background: none;
   color: inherit;
   padding: 0;
-  font-size: 0.9em;
+  font-size: 0.875em;
   line-height: 1.6;
   border: none;
-  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-family: 'Cascadia Code', 'Fira Code', monospace;
 }
 
 /* ===== Lists ===== */

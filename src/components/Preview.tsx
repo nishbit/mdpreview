@@ -31,7 +31,6 @@ function CodeCopyButton({ code }: { code: string }) {
             className={`code-copy-button ${copied ? 'copied' : ''}`}
             onClick={handleCopy}
             title={copied ? 'Copied!' : 'Copy code'}
-            aria-label={copied ? 'Copied' : 'Copy code'}
         >
             {copied ? (
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -47,7 +46,7 @@ function CodeCopyButton({ code }: { code: string }) {
     );
 }
 
-// Custom Image component with loading state and captions
+// Custom Image component
 function MarkdownImage({ src, alt }: { src?: string; alt?: string }) {
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
@@ -99,11 +98,9 @@ function Preview({ content }: PreviewProps) {
                 <Markdown
                     remarkPlugins={[remarkGfm]}
                     components={{
-                        code({ className, children, ...props }: ComponentPropsWithoutRef<'code'>) {
+                        code({ className, children }: ComponentPropsWithoutRef<'code'>) {
                             const match = /language-(\w+)/.exec(className || '');
                             const codeString = String(children).replace(/\n$/, '');
-
-                            // Check if this is a code block (has language) or inline code
                             const isCodeBlock = match;
 
                             if (isCodeBlock) {
@@ -121,8 +118,8 @@ function Preview({ content }: PreviewProps) {
                                             customStyle={{
                                                 margin: 0,
                                                 padding: '1em',
-                                                borderRadius: '0 0 8px 8px',
-                                                fontSize: '0.9em',
+                                                fontSize: '0.875em',
+                                                background: 'transparent',
                                             }}
                                         >
                                             {codeString}
@@ -131,12 +128,7 @@ function Preview({ content }: PreviewProps) {
                                 );
                             }
 
-                            // Inline code
-                            return (
-                                <code className="inline-code" {...props}>
-                                    {children}
-                                </code>
-                            );
+                            return <code className="inline-code">{children}</code>;
                         },
                         img({ src, alt }) {
                             return <MarkdownImage src={src} alt={alt} />;
