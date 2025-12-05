@@ -280,7 +280,10 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1 className="app-title">MD Preview</h1>
+        <h1 className="app-title">
+          <span className="logo-icon">✒</span>
+          <span className="logo-text">Ye Olde Markdown</span>
+        </h1>
         <Stats content={markdown} />
 
         {/* View Mode Toggles */}

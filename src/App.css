@@ -21,6 +21,9 @@
 }
 
 .app-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
   margin: 0;
   font-family: 'Merriweather', Georgia, serif;
   font-size: 1rem;
@@ -28,6 +31,20 @@
   color: var(--color-header-text);
   letter-spacing: -0.01em;
   transition: color 0.3s ease;
+}
+
+.logo-icon {
+  font-size: 1.1em;
+  opacity: 0.85;
+  transition: transform 0.3s ease;
+}
+
+.app-title:hover .logo-icon {
+  transform: rotate(-15deg);
+}
+
+.logo-text {
+  font-style: italic;
 }
 
 /* ===== Theme Toggle Button ===== */
