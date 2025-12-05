@@ -47,7 +47,7 @@ function CodeCopyButton({ code }: { code: string }) {
     );
 }
 
-// Custom Image component
+// Custom Image component - uses span to avoid p > div nesting issues
 function MarkdownImage({ src, alt }: { src?: string; alt?: string }) {
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
@@ -55,18 +55,18 @@ function MarkdownImage({ src, alt }: { src?: string; alt?: string }) {
     if (!src) return null;
 
     return (
-        <figure className="image-figure">
-            <div className={`image-wrapper ${isLoading ? 'loading' : ''} ${hasError ? 'error' : ''}`}>
+        <span className="image-figure" style={{ display: 'block' }}>
+            <span className={`image-wrapper ${isLoading ? 'loading' : ''} ${hasError ? 'error' : ''}`} style={{ display: 'block' }}>
                 {isLoading && !hasError && (
-                    <div className="image-skeleton">
-                        <div className="skeleton-shimmer" />
-                    </div>
+                    <span className="image-skeleton" style={{ display: 'block' }}>
+                        <span className="skeleton-shimmer" style={{ display: 'block' }} />
+                    </span>
                 )}
                 {hasError ? (
-                    <div className="image-error">
+                    <span className="image-error" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2em', color: 'var(--color-text-muted)', gap: '0.5em' }}>
                         <span className="error-icon">!</span>
                         <span>Failed to load image</span>
-                    </div>
+                    </span>
                 ) : (
                     <img
                         src={src}
@@ -80,9 +80,9 @@ function MarkdownImage({ src, alt }: { src?: string; alt?: string }) {
                         style={{ opacity: isLoading ? 0 : 1 }}
                     />
                 )}
-            </div>
-            {alt && !hasError && <figcaption className="image-caption">{alt}</figcaption>}
-        </figure>
+            </span>
+            {alt && !hasError && <span className="image-caption" style={{ display: 'block' }}>{alt}</span>}
+        </span>
     );
 }
 
@@ -111,6 +111,18 @@ function Preview({ content }: PreviewProps) {
                 <Markdown
                     remarkPlugins={[remarkGfm]}
                     components={{
+                        // Custom paragraph to handle block elements properly
+                        p({ children, ...props }) {
+                            // Check if children contain block elements (images become spans with display:block)
+                            const hasBlockChild = Array.isArray(children)
+                                ? children.some((child: any) => child?.type === MarkdownImage || child?.props?.className?.includes('image-figure'))
+                                : (children as any)?.type === MarkdownImage;
+
+                            if (hasBlockChild) {
+                                return <div {...props}>{children}</div>;
+                            }
+                            return <p {...props}>{children}</p>;
+                        },
                         code({ className, children }: ComponentPropsWithoutRef<'code'>) {
                             const match = /language-(\w+)/.exec(className || '');
                             const codeString = String(children).replace(/\n$/, '');
