@@ -8,110 +8,170 @@ import { useScrollSync } from './context/ScrollSyncContext';
 import ThemeSwitchIcon from './assets/switchtheme.svg';
 import './App.css';
 
-const defaultMarkdown = `# Welcome to MD Preview
+const defaultMarkdown = `# Hark! A Markdown Primer
 
-A beautiful, minimal markdown editor with **live preview**.
-
-## Typography
-
-Regular text with **bold**, *italic*, and ***bold italic*** formatting. You can also use ~~strikethrough~~ text.
-
-### Links & Inline Code
-
-Visit [GitHub](https://github.com) or check the \`README.md\` file. Use \`const x = 42\` for inline code.
+*Wherein we learn the ancient art of formatting text, with neither pretense nor unnecessary complexity.*
 
 ---
 
-## Lists
+## The Basics, or: How I Learned to Stop Worrying and Love the Asterisk
 
-### Unordered List
-- First item
-- Second item
-  - Nested item
-  - Another nested item
-    - Deep nested
-- Third item
+Text can be **bold** (for when you mean it), *italic* (for when you're being dramatic), or ***both*** (for when you really need therapy).
 
-### Ordered List
-1. First step
-2. Second step
-   1. Sub-step one
-   2. Sub-step two
-3. Third step
+You may also ~~cross things out~~ when you change your mind mid-sentence.
 
-### Task List
-- [x] Create the editor
-- [x] Add syntax highlighting
-- [ ] Implement export feature
-- [ ] Add more themes
-
----
-
-## Blockquotes
-
-> "The best way to predict the future is to create it."
+> "I have made this longer than usual because I have not had time to make it shorter."
 > 
-> — *Abraham Lincoln*
-
-> **Note:** Nested blockquotes work too.
->
-> > This is a nested quote.
+> — *Blaise Pascal, absolutely nailing it*
 
 ---
 
-## Code Blocks
+## Lists: A Taxonomy of Things
+
+### The Unordered Kind
+- Thoughts arrive unbidden
+- Sometimes they're useful
+  - Often they are not
+  - This is fine
+    - Everything is fine
+- We proceed regardless
+
+### The Ordered Kind
+1. Wake up
+2. Contemplate existence
+3. Make questionable decisions
+   1. Regret them immediately
+   2. Learn nothing
+4. Sleep
+5. Repeat
+
+### The Aspirational Kind
+- [x] Start project
+- [x] Get carried away with scope
+- [ ] Actually finish something
+- [ ] Touch grass
+
+---
+
+## On the Matter of Quotations
+
+> "The trouble with quotes on the internet is that you can never know if they are genuine."
+>
+> — *Abraham Lincoln, 1864*
+
+> **A Nested Thought:**
+>
+> > "I put a quote inside a quote so you can quote while you quote."
+> >
+> > — *Someone, probably*
+
+---
+
+## The Programmer's Lament
 
 \`\`\`javascript
-// JavaScript example
-function greet(name) {
-  return \`Hello, \${name}!\`;
-}
+// A function that works on the first try
+// (this comment is aspirational)
 
-console.log(greet("World"));
+function doesThisWork(maybe) {
+  try {
+    return hopefullyYes(maybe);
+  } catch (e) {
+    // TODO: fix later
+    // NOTE: "later" was 3 years ago
+    return "¯\\_(ツ)_/¯";
+  }
+}
 \`\`\`
 
 \`\`\`python
-# Python example
-def fibonacci(n):
-    if n <= 1:
-        return n
-    return fibonacci(n - 1) + fibonacci(n - 2)
-
-print(fibonacci(10))
+# The eternal struggle
+def is_it_a_bug_or_a_feature(behavior):
+    """
+    Determines the nature of unexpected software behavior.
+    
+    Returns: Whatever keeps us employed
+    """
+    if behavior.annoying and behavior.reproducible:
+        return "bug"
+    elif behavior.annoying and not behavior.reproducible:
+        return "cosmic_ray"  # actual thing btw
+    else:
+        return "feature"
 \`\`\`
 
 \`\`\`css
-/* CSS example */
-.container {
+/* The CSS of a thousand sorrows */
+.center-this-div {
+  /* The following took 3 hours */
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  
+  /* The below was the first attempt */
+  /* margin: auto; */
+  /* margin: 0 auto; */
+  /* text-align: center; */
+  /* position: absolute; */
+  /* top: 50%; left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  /* display: table-cell; */
+  /* vertical-align: middle; */
+  /* ...I need a moment */
 }
 \`\`\`
 
 ---
 
-## Tables
+## A Scholarly Table
 
-| Feature | Status | Priority |
-|---------|--------|----------|
-| Editor | ✅ Done | High |
-| Preview | ✅ Done | High |
-| Themes | ✅ Done | Medium |
-| Export | 🔄 In Progress | Low |
-
----
-
-## Images
-
-![Sunset over mountains](https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80)
+| Term | Definition | Frequency of Use |
+|------|------------|-----------------|
+| Verily | Indeed, truly | Forsooth: often |
+| Forthwith | Immediately, at once | When one meaneth it |
+| Henceforth | From this time on | Upon making proclamations |
+| Prithee | Please (I pray thee) | When seeking favors |
+| Methinks | I think | When waxing philosophical |
 
 ---
 
-## Horizontal Rules
+## Ye Olde ASCII Arte
 
-Use three dashes, asterisks, or underscores:
+\`\`\`
+     /\\
+    /  \\
+   /    \\
+  /______\\
+    |  |     "What if we build houses
+    |  |      but like... pointy?"
+    |__|     
+             — Medieval Architect, c. 1200
+\`\`\`
+
+\`\`\`
+    📜
+   /|\\      Scribe's posture after
+    |       10 hours of illumination
+   / \\      
+\`\`\`
+
+---
+
+## Links & Such
+
+Behold, a [link that goes somewhere](https://example.com), and here's some \`inline code\` for when thou needst to reference \`const enlightenment = true\`.
+
+---
+
+## An Image, For Visual Learners
+
+![A vista most pleasing to the eye](https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80)
+
+---
+
+## In Closing
+
+Three ways to make a horizontal line, because options:
 
 ---
 
@@ -119,21 +179,11 @@ Use three dashes, asterisks, or underscores:
 
 ___
 
----
+Remember: *the best markdown is the markdown you actually ship.*
 
-## Headings Reference
-
-# Heading 1
-## Heading 2
-### Heading 3
-#### Heading 4
-##### Heading 5
-###### Heading 6
-
----
-
-*Happy writing!* ✨
+Now go forth and format. ✨
 `;
+
 
 const STORAGE_KEY = 'mdpreview-split-sizes';
 const VIEW_MODE_KEY = 'mdpreview-view-mode';
