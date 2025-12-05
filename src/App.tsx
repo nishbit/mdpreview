@@ -139,24 +139,14 @@ def is_it_a_bug_or_a_feature(behavior):
 
 ---
 
-## Ye Olde ASCII Arte
+## A Brief Illustration
 
 \`\`\`
-     /\\
-    /  \\
-   /    \\
-  /______\\
-    |  |     "What if we build houses
-    |  |      but like... pointy?"
-    |__|     
-             — Medieval Architect, c. 1200
-\`\`\`
-
-\`\`\`
-    📜
-   /|\\      Scribe's posture after
-    |       10 hours of illumination
-   / \\      
+   .-------------------.
+   |   KEEP CALM AND   |
+   |   FORMAT .md      |
+   '-------------------'
+         — Ancient Proverb
 \`\`\`
 
 ---
@@ -185,7 +175,7 @@ ___
 
 Remember: *the best markdown is the markdown you actually ship.*
 
-Now go forth and format. ✨
+Now go forth and format.
 `;
 
 
