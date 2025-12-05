@@ -4,6 +4,7 @@ import Editor from './components/Editor';
 import Preview from './components/Preview';
 import Stats from './components/Stats';
 import { useTheme } from './context/ThemeContext';
+import { useScrollSync } from './context/ScrollSyncContext';
 import ThemeSwitchIcon from './assets/switchtheme.svg';
 import './App.css';
 
@@ -172,6 +173,7 @@ function App() {
   const [sizes, setSizes] = useState<number[]>(getSavedSizes);
   const [viewMode, setViewMode] = useState<ViewMode>(getSavedViewMode);
   const { theme, toggleTheme } = useTheme();
+  const { syncEnabled, toggleSync } = useScrollSync();
 
   const handleDragEnd = useCallback((newSizes: number[]) => {
     setSizes(newSizes);
@@ -265,6 +267,19 @@ function App() {
             </svg>
           </button>
         </div>
+
+        {/* Scroll Sync Toggle */}
+        <button
+          className={`scroll-sync-toggle ${syncEnabled ? 'active' : ''}`}
+          onClick={toggleSync}
+          title={syncEnabled ? 'Scroll sync: ON' : 'Scroll sync: OFF'}
+          aria-label={syncEnabled ? 'Disable scroll sync' : 'Enable scroll sync'}
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M8 2v4M8 10v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <path d="M5 5l3-3 3 3M5 11l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
 
         <button
           className="theme-toggle"
