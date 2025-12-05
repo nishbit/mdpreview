@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -10,6 +10,41 @@ import type { ComponentPropsWithoutRef } from 'react';
 
 interface PreviewProps {
     content: string;
+}
+
+// Code block copy button
+function CodeCopyButton({ code }: { code: string }) {
+    const [copied, setCopied] = useState(false);
+
+    const handleCopy = useCallback(async () => {
+        try {
+            await navigator.clipboard.writeText(code);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 1200);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        }
+    }, [code]);
+
+    return (
+        <button
+            className={`code-copy-button ${copied ? 'copied' : ''}`}
+            onClick={handleCopy}
+            title={copied ? 'Copied!' : 'Copy code'}
+            aria-label={copied ? 'Copied' : 'Copy code'}
+        >
+            {copied ? (
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+            ) : (
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <rect x="5.5" y="5.5" width="8" height="8" rx="1" stroke="currentColor" strokeWidth="1.5" />
+                    <path d="M10.5 5.5V3.5C10.5 2.95 10.05 2.5 9.5 2.5H3.5C2.95 2.5 2.5 2.95 2.5 3.5V9.5C2.5 10.05 2.95 10.5 3.5 10.5H5.5" stroke="currentColor" strokeWidth="1.5" />
+                </svg>
+            )}
+        </button>
+    );
 }
 
 // Custom Image component with loading state and captions
@@ -73,20 +108,26 @@ function Preview({ content }: PreviewProps) {
 
                             if (isCodeBlock) {
                                 return (
-                                    <SyntaxHighlighter
-                                        style={theme === 'dark' ? oneDark : oneLight}
-                                        language={match[1]}
-                                        PreTag="div"
-                                        className="syntax-highlighter"
-                                        customStyle={{
-                                            margin: 0,
-                                            padding: '1em',
-                                            borderRadius: '8px',
-                                            fontSize: '0.9em',
-                                        }}
-                                    >
-                                        {codeString}
-                                    </SyntaxHighlighter>
+                                    <div className="code-block-wrapper">
+                                        <div className="code-block-header">
+                                            <span className="code-block-lang">{match[1]}</span>
+                                            <CodeCopyButton code={codeString} />
+                                        </div>
+                                        <SyntaxHighlighter
+                                            style={theme === 'dark' ? oneDark : oneLight}
+                                            language={match[1]}
+                                            PreTag="div"
+                                            className="syntax-highlighter"
+                                            customStyle={{
+                                                margin: 0,
+                                                padding: '1em',
+                                                borderRadius: '0 0 8px 8px',
+                                                fontSize: '0.9em',
+                                            }}
+                                        >
+                                            {codeString}
+                                        </SyntaxHighlighter>
+                                    </div>
                                 );
                             }
 
@@ -110,4 +151,3 @@ function Preview({ content }: PreviewProps) {
 }
 
 export default Preview;
-
