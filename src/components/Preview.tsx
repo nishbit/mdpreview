@@ -1,10 +1,11 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useTheme } from '../context/ThemeContext';
+import { useScrollSync } from '../context/ScrollSyncContext';
 import CopyButton from './CopyButton';
 import type { ComponentPropsWithoutRef } from 'react';
 
@@ -87,6 +88,14 @@ function MarkdownImage({ src, alt }: { src?: string; alt?: string }) {
 
 function Preview({ content }: PreviewProps) {
     const { theme } = useTheme();
+    const previewRef = useRef<HTMLDivElement>(null);
+    const { registerPreview, handlePreviewScroll } = useScrollSync();
+
+    // Register preview element with scroll sync
+    useEffect(() => {
+        registerPreview(previewRef.current);
+        return () => registerPreview(null);
+    }, [registerPreview]);
 
     return (
         <div className="preview-container">
@@ -94,7 +103,11 @@ function Preview({ content }: PreviewProps) {
                 <span className="panel-title">Preview</span>
                 <CopyButton text={content} />
             </div>
-            <div className="preview-content markdown-body">
+            <div
+                className="preview-content markdown-body"
+                ref={previewRef}
+                onScroll={handlePreviewScroll}
+            >
                 <Markdown
                     remarkPlugins={[remarkGfm]}
                     components={{
