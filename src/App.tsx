@@ -10,19 +10,23 @@ import './App.css';
 
 const defaultMarkdown = `# Hark! A Markdown Primer
 
-*Wherein we learn the ancient art of formatting text, with neither pretense nor unnecessary complexity.*
+*Wherein we learn the ancient art of formatting text, and pretend we'll remember all of it.*
 
 ---
 
-## The Basics, or: How I Learned to Stop Worrying and Love the Asterisk
+## Formatting, or Lack Thereof
 
-Text can be **bold** (for when you mean it), *italic* (for when you're being dramatic), or ***both*** (for when you really need therapy).
+Text can be **bold** (for emphasis), *italic* (for that one word you really want to land), or ***both*** (for divorce announcements).
 
-You may also ~~cross things out~~ when you change your mind mid-sentence.
+You may also ~~cross things out~~ when past-you was wrong and present-you is too lazy to delete.
 
 > "I have made this longer than usual because I have not had time to make it shorter."
 > 
-> — *Blaise Pascal, absolutely nailing it*
+> — *Blaise Pascal, 1657*
+
+> "Any fool can write code that a computer can understand. Good programmers write code that humans can understand."
+>
+> — *Martin Fowler, optimistically*
 
 ---
 
