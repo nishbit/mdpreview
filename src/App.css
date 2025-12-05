@@ -129,26 +129,26 @@
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  animation: panelFadeIn 0.3s ease-out;
+  animation: panelFadeIn 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 /* ===== View Transition Animations ===== */
 @keyframes panelFadeIn {
   from {
     opacity: 0;
-    transform: scale(0.98) translateY(8px);
+    transform: translateY(4px);
   }
 
   to {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: translateY(0);
   }
 }
 
 @keyframes panelSlideIn {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(-8px);
   }
 
   to {
@@ -160,7 +160,7 @@
 @keyframes panelSlideInRight {
   from {
     opacity: 0;
-    transform: translateX(20px);
+    transform: translateX(8px);
   }
 
   to {
@@ -169,13 +169,13 @@
   }
 }
 
-/* Split view panel animations */
+/* Split view panel animations - gentle and slow */
 .split-container .editor-container {
-  animation: panelSlideIn 0.25s ease-out;
+  animation: panelSlideIn 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .split-container .preview-container {
-  animation: panelSlideInRight 0.25s ease-out;
+  animation: panelSlideInRight 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 /* ===== Panel Shared Styles ===== */
