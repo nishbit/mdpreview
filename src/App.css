@@ -13,8 +13,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.5rem;
   background: var(--color-header-accent);
-  padding: 0.875rem 1.5rem;
+  padding: 0.5rem 1rem;
   margin: 0;
   transition: background 0.3s ease;
 }
@@ -22,7 +23,7 @@
 .app-title {
   margin: 0;
   font-family: 'Merriweather', Georgia, serif;
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--color-header-text);
   letter-spacing: -0.01em;
@@ -34,14 +35,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   background: var(--color-bg-elevated);
   border: 1px solid var(--color-border);
-  border-radius: 12px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.25s ease;
-  padding: 8px;
+  padding: 6px;
 }
 
 .theme-toggle:hover {
@@ -141,13 +142,13 @@
 .app-main {
   display: flex;
   flex: 1;
-  padding: 1rem 1.5rem 1.5rem;
+  padding: 0.75rem;
   overflow: hidden;
   background: var(--color-bg-primary);
 }
 
 .app-main.single-view {
-  padding: 1rem 1.5rem 1.5rem;
+  padding: 0.75rem;
 }
 
 .app-main.single-view .editor-container,
@@ -1141,4 +1142,166 @@
 
 .markdown-body .image-wrapper img {
   transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ===== Responsive Styles ===== */
+
+/* Tablet and smaller - stack vertically */
+@media (max-width: 900px) {
+  .app-header {
+    padding: 0.5rem 0.75rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .app-title {
+    font-size: 0.9rem;
+  }
+
+  .app-main {
+    padding: 0.5rem;
+  }
+
+  .app-main.single-view {
+    padding: 0.5rem;
+  }
+
+  /* Stack split panels vertically */
+  .split-container {
+    flex-direction: column !important;
+  }
+
+  .split-container>div {
+    width: 100% !important;
+    height: 50% !important;
+  }
+
+  /* Hide the gutter in vertical mode or make it horizontal */
+  .gutter.gutter-horizontal {
+    display: none;
+  }
+
+  .editor-container,
+  .preview-container {
+    border-radius: 12px;
+  }
+
+  /* Reduce panel header size */
+  .panel-header {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .panel-title {
+    font-size: 0.65rem;
+  }
+
+  /* Reduce view mode button size */
+  .view-mode-toggles {
+    padding: 2px;
+  }
+
+  .view-mode-btn {
+    width: 26px;
+    height: 24px;
+  }
+
+  .view-mode-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .scroll-sync-toggle {
+    width: 28px;
+    height: 28px;
+  }
+
+  .theme-toggle {
+    width: 28px;
+    height: 28px;
+    padding: 5px;
+  }
+}
+
+/* Mobile - very small screens */
+@media (max-width: 480px) {
+  .app-header {
+    padding: 0.4rem 0.5rem;
+  }
+
+  .app-title {
+    font-size: 0.85rem;
+  }
+
+  .app-main {
+    padding: 0.35rem;
+  }
+
+  .app-main.single-view {
+    padding: 0.35rem;
+  }
+
+  .app-main.single-view .editor-container,
+  .app-main.single-view .preview-container {
+    max-width: 100%;
+  }
+
+  .editor-container,
+  .preview-container {
+    border-radius: 8px;
+  }
+
+  .panel-header {
+    padding: 0.4rem 0.6rem;
+  }
+
+  .panel-title {
+    font-size: 0.6rem;
+  }
+
+  /* Editor specific */
+  .editor-content {
+    font-size: 0.9rem;
+  }
+
+  .line-numbers {
+    padding: 0.75rem 0.4rem;
+    min-width: 2rem;
+  }
+
+  .line-number {
+    font-size: 0.7rem;
+  }
+
+  .editor-textarea {
+    padding: 0.75rem 0.6rem;
+  }
+
+  /* Preview specific */
+  .preview-content {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  /* Stats */
+  .stats-bar {
+    display: none;
+  }
+
+  /* Smaller buttons */
+  .view-mode-btn {
+    width: 24px;
+    height: 22px;
+  }
+
+  .scroll-sync-toggle,
+  .theme-toggle {
+    width: 26px;
+    height: 26px;
+    padding: 4px;
+  }
+
+  .copy-button {
+    width: 24px;
+    height: 24px;
+  }
 }
