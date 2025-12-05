@@ -77,6 +77,40 @@
   opacity: 1;
 }
 
+/* ===== View Mode Toggles ===== */
+.view-mode-toggles {
+  display: flex;
+  gap: 2px;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.view-mode-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  transition: all 0.2s ease;
+}
+
+.view-mode-btn:hover {
+  color: var(--color-text-primary);
+  background: var(--color-panel-hover);
+}
+
+.view-mode-btn.active {
+  color: var(--color-accent);
+  background: var(--color-bg-secondary);
+}
+
 /* ===== Main Content ===== */
 .app-main {
   display: flex;
@@ -84,6 +118,17 @@
   padding: 1rem 1.5rem 1.5rem;
   overflow: hidden;
   background: var(--color-bg-primary);
+}
+
+.app-main.single-view {
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+.app-main.single-view .editor-container,
+.app-main.single-view .preview-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 /* ===== Panel Shared Styles ===== */

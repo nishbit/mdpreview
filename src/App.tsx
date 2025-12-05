@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Split from 'react-split';
 import Editor from './components/Editor';
 import Preview from './components/Preview';
@@ -135,7 +135,10 @@ ___
 `;
 
 const STORAGE_KEY = 'mdpreview-split-sizes';
+const VIEW_MODE_KEY = 'mdpreview-view-mode';
 const DEFAULT_SIZES = [50, 50];
+
+type ViewMode = 'split' | 'editor' | 'preview';
 
 function getSavedSizes(): number[] {
   try {
@@ -152,9 +155,22 @@ function getSavedSizes(): number[] {
   return DEFAULT_SIZES;
 }
 
+function getSavedViewMode(): ViewMode {
+  try {
+    const saved = localStorage.getItem(VIEW_MODE_KEY);
+    if (saved === 'split' || saved === 'editor' || saved === 'preview') {
+      return saved;
+    }
+  } catch (e) {
+    console.error('Failed to load view mode:', e);
+  }
+  return 'split';
+}
+
 function App() {
   const [markdown, setMarkdown] = useState(defaultMarkdown);
   const [sizes, setSizes] = useState<number[]>(getSavedSizes);
+  const [viewMode, setViewMode] = useState<ViewMode>(getSavedViewMode);
   const { theme, toggleTheme } = useTheme();
 
   const handleDragEnd = useCallback((newSizes: number[]) => {
@@ -166,11 +182,90 @@ function App() {
     }
   }, []);
 
+  const changeViewMode = useCallback((mode: ViewMode) => {
+    setViewMode(mode);
+    try {
+      localStorage.setItem(VIEW_MODE_KEY, mode);
+    } catch (e) {
+      console.error('Failed to save view mode:', e);
+    }
+  }, []);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey || e.metaKey) {
+        switch (e.key) {
+          case '\\':
+            e.preventDefault();
+            changeViewMode('split');
+            break;
+          case 'e':
+          case 'E':
+            if (e.shiftKey) {
+              e.preventDefault();
+              changeViewMode('editor');
+            }
+            break;
+          case 'p':
+          case 'P':
+            if (e.shiftKey) {
+              e.preventDefault();
+              changeViewMode('preview');
+            }
+            break;
+        }
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [changeViewMode]);
+
   return (
     <div className="app">
       <header className="app-header">
         <h1 className="app-title">MD Preview</h1>
         <Stats content={markdown} />
+
+        {/* View Mode Toggles */}
+        <div className="view-mode-toggles">
+          <button
+            className={`view-mode-btn ${viewMode === 'editor' ? 'active' : ''}`}
+            onClick={() => changeViewMode('editor')}
+            title="Editor only (Ctrl+Shift+E)"
+            aria-label="Editor only"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" />
+              <line x1="5" y1="5" x2="11" y2="5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              <line x1="5" y1="8" x2="9" y2="8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              <line x1="5" y1="11" x2="11" y2="11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </button>
+          <button
+            className={`view-mode-btn ${viewMode === 'split' ? 'active' : ''}`}
+            onClick={() => changeViewMode('split')}
+            title="Split view (Ctrl+\)"
+            aria-label="Split view"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="2" y="2" width="5" height="12" rx="1" stroke="currentColor" strokeWidth="1.5" />
+              <rect x="9" y="2" width="5" height="12" rx="1" stroke="currentColor" strokeWidth="1.5" />
+            </svg>
+          </button>
+          <button
+            className={`view-mode-btn ${viewMode === 'preview' ? 'active' : ''}`}
+            onClick={() => changeViewMode('preview')}
+            title="Preview only (Ctrl+Shift+P)"
+            aria-label="Preview only"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" />
+              <circle cx="8" cy="8" r="2" stroke="currentColor" strokeWidth="1.5" />
+            </svg>
+          </button>
+        </div>
+
         <button
           className="theme-toggle"
           onClick={toggleTheme}
@@ -184,18 +279,27 @@ function App() {
           />
         </button>
       </header>
-      <Split
-        className="app-main split-container"
-        sizes={sizes}
-        minSize={200}
-        gutterSize={12}
-        onDragEnd={handleDragEnd}
-        direction="horizontal"
-        cursor="col-resize"
-      >
-        <Editor value={markdown} onChange={setMarkdown} />
-        <Preview content={markdown} />
-      </Split>
+
+      {/* Conditional View Rendering */}
+      {viewMode === 'split' ? (
+        <Split
+          className="app-main split-container"
+          sizes={sizes}
+          minSize={200}
+          gutterSize={12}
+          onDragEnd={handleDragEnd}
+          direction="horizontal"
+          cursor="col-resize"
+        >
+          <Editor value={markdown} onChange={setMarkdown} />
+          <Preview content={markdown} />
+        </Split>
+      ) : (
+        <main className="app-main single-view">
+          {viewMode === 'editor' && <Editor value={markdown} onChange={setMarkdown} />}
+          {viewMode === 'preview' && <Preview content={markdown} />}
+        </main>
+      )}
     </div>
   );
 }
