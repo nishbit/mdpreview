@@ -129,6 +129,53 @@
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
+  animation: panelFadeIn 0.3s ease-out;
+}
+
+/* ===== View Transition Animations ===== */
+@keyframes panelFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes panelSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes panelSlideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Split view panel animations */
+.split-container .editor-container {
+  animation: panelSlideIn 0.25s ease-out;
+}
+
+.split-container .preview-container {
+  animation: panelSlideInRight 0.25s ease-out;
 }
 
 /* ===== Panel Shared Styles ===== */
@@ -143,7 +190,7 @@
   border-radius: 16px;
   border: 1px solid var(--color-border);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
 }
 
 .editor-container:hover,
@@ -188,11 +235,13 @@
   background: var(--color-accent);
   height: 64px;
   width: 5px;
+  box-shadow: 0 0 12px var(--color-accent);
 }
 
 .gutter.gutter-horizontal:active::before {
   background: var(--color-accent);
   height: 80px;
+  box-shadow: 0 0 20px var(--color-accent);
 }
 
 /* ===== Panel Headers ===== */
