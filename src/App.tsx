@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import Split from 'react-split';
 import Editor from './components/Editor';
 import Preview from './components/Preview';
 import Stats from './components/Stats';
@@ -133,10 +134,37 @@ ___
 *Happy writing!* ✨
 `;
 
+const STORAGE_KEY = 'mdpreview-split-sizes';
+const DEFAULT_SIZES = [50, 50];
+
+function getSavedSizes(): number[] {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const sizes = JSON.parse(saved);
+      if (Array.isArray(sizes) && sizes.length === 2) {
+        return sizes;
+      }
+    }
+  } catch (e) {
+    console.error('Failed to load split sizes:', e);
+  }
+  return DEFAULT_SIZES;
+}
 
 function App() {
   const [markdown, setMarkdown] = useState(defaultMarkdown);
+  const [sizes, setSizes] = useState<number[]>(getSavedSizes);
   const { theme, toggleTheme } = useTheme();
+
+  const handleDragEnd = useCallback((newSizes: number[]) => {
+    setSizes(newSizes);
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newSizes));
+    } catch (e) {
+      console.error('Failed to save split sizes:', e);
+    }
+  }, []);
 
   return (
     <div className="app">
@@ -156,10 +184,18 @@ function App() {
           />
         </button>
       </header>
-      <main className="app-main">
+      <Split
+        className="app-main split-container"
+        sizes={sizes}
+        minSize={200}
+        gutterSize={12}
+        onDragEnd={handleDragEnd}
+        direction="horizontal"
+        cursor="col-resize"
+      >
         <Editor value={markdown} onChange={setMarkdown} />
         <Preview content={markdown} />
-      </main>
+      </Split>
     </div>
   );
 }

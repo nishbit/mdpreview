@@ -81,7 +81,6 @@
 .app-main {
   display: flex;
   flex: 1;
-  gap: 1rem;
   padding: 1rem 1.5rem 1.5rem;
   overflow: hidden;
   background: var(--color-bg-primary);
@@ -90,9 +89,9 @@
 /* ===== Panel Shared Styles ===== */
 .editor-container,
 .preview-container {
-  flex: 1;
   display: flex;
   flex-direction: column;
+  height: 100%;
   min-width: 0;
   overflow: hidden;
   background: var(--color-bg-secondary);
@@ -105,6 +104,50 @@
 .editor-container:hover,
 .preview-container:hover {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== Split Gutter (Drag Handle) ===== */
+.split-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.split-container>div {
+  overflow: hidden;
+}
+
+.gutter {
+  position: relative;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.gutter.gutter-horizontal {
+  cursor: col-resize;
+}
+
+.gutter.gutter-horizontal::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 48px;
+  background: var(--color-border);
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
+.gutter.gutter-horizontal:hover::before {
+  background: var(--color-accent);
+  height: 64px;
+  width: 5px;
+}
+
+.gutter.gutter-horizontal:active::before {
+  background: var(--color-accent);
+  height: 80px;
 }
 
 /* ===== Panel Headers ===== */
