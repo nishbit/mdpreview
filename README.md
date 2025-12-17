@@ -1,4 +1,4 @@
-# Ye Olde Markdown
+# Markdown Preview
 
 A markdown editor with live preview.
 
