@@ -33,16 +33,6 @@
   transition: color 0.3s ease;
 }
 
-.logo-icon {
-  font-size: 1.1em;
-  opacity: 0.85;
-  transition: transform 0.3s ease;
-}
-
-.app-title:hover .logo-icon {
-  transform: rotate(-15deg);
-}
-
 .logo-text {
   font-style: italic;
 }
