@@ -16,7 +16,7 @@ const defaultMarkdown = `# Hark! A Markdown Primer
 
 ## Formatting, or Lack Thereof
 
-Text can be **bold** (for emphasis), *italic* (for that one word you really want to land), or ***both*** (for divorce announcements).
+Text can be **bold** (for emphasis), *italic* (for that one word you really want to land), or ***both***.
 
 You may also ~~cross things out~~ when past-you was wrong and present-you is too lazy to delete.
 
@@ -26,7 +26,7 @@ You may also ~~cross things out~~ when past-you was wrong and present-you is too
 
 > "Any fool can write code that a computer can understand. Good programmers write code that humans can understand."
 >
-> — *Martin Fowler, optimistically*
+> — *Martin Fowler*
 
 ---
 
@@ -270,9 +270,8 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1 className="app-title">
-          <span className="logo-icon">✒</span>
-          <span className="logo-text">Ye Olde Markdown</span>
+        <h1 className="app-title">    
+          <span className="logo-text">Markdown Preview</span>
         </h1>
         <Stats content={markdown} />
 
