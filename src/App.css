@@ -25,7 +25,7 @@
   align-items: center;
   gap: 0.4em;
   margin: 0;
-  font-family: 'Merriweather', Georgia, serif;
+  font-family: "Merriweather", Georgia, serif;
   font-size: 1rem;
   font-weight: 700;
   color: var(--color-header-text);
@@ -238,7 +238,7 @@
   flex-direction: row;
 }
 
-.split-container>div {
+.split-container > div {
   overflow: hidden;
 }
 
@@ -253,7 +253,7 @@
 }
 
 .gutter.gutter-horizontal::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -290,7 +290,7 @@
 }
 
 .panel-title {
-  font-family: 'Merriweather', Georgia, serif;
+  font-family: "Merriweather", Georgia, serif;
   font-size: 0.6875rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -369,7 +369,7 @@
   background: transparent;
   border: none;
   border-radius: 6px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.8125rem;
   color: var(--color-text-primary);
   cursor: pointer;
@@ -381,7 +381,7 @@
 }
 
 .copy-dropdown-item kbd {
-  font-family: 'Cascadia Code', monospace;
+  font-family: "Cascadia Code", monospace;
   font-size: 0.6875rem;
   color: var(--color-text-muted);
   background: var(--color-bg-tertiary);
@@ -411,7 +411,7 @@
 }
 
 .line-number {
-  font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', monospace;
+  font-family: "Cascadia Code", "Fira Code", "JetBrains Mono", monospace;
   font-size: 0.8125rem;
   line-height: 1.7;
   color: var(--color-text-muted);
@@ -434,7 +434,7 @@
   border: none;
   outline: none;
   resize: none;
-  font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', monospace;
+  font-family: "Cascadia Code", "Fira Code", "JetBrains Mono", monospace;
   font-size: 0.9375rem;
   line-height: 1.7;
   tab-size: 2;
@@ -514,7 +514,7 @@
 }
 
 .stat-value {
-  font-family: 'Cascadia Code', 'Fira Code', monospace;
+  font-family: "Cascadia Code", "Fira Code", monospace;
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--color-text-primary);
@@ -543,7 +543,7 @@
 }
 
 .stat-label {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.6875rem;
   font-weight: 500;
   color: var(--color-text-muted);
@@ -561,13 +561,28 @@
 /* Responsive Stats */
 @media (max-width: 900px) {
   .stats-bar {
-    display: none;
+    order: 10;
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.25rem;
+    background: transparent;
+    border: none;
+    padding: 0.25rem 0;
+  }
+
+  .stats-group {
+    justify-content: center;
+    gap: 1rem;
   }
 }
 
-@media (max-width: 700px) {
-  .stats-bar {
+@media (max-width: 480px) {
+  .stat-label {
     display: none;
+  }
+
+  .stats-group {
+    gap: 0.75rem;
   }
 }
 
@@ -604,7 +619,7 @@
 /* h6: 1rem, h5: 1.118rem, h4: 1.272rem, h3: 1.618rem, h2: 2.058rem, h1: 2.618rem */
 
 .markdown-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-size: 1rem;
   line-height: 1.75;
   letter-spacing: -0.011em;
@@ -617,7 +632,7 @@
 .markdown-body h4,
 .markdown-body h5,
 .markdown-body h6 {
-  font-family: 'Merriweather', Georgia, serif;
+  font-family: "Merriweather", Georgia, serif;
   font-weight: 700;
   line-height: 1.25;
   color: var(--color-text-heading);
@@ -681,7 +696,7 @@
   margin: 0 0 1.25em;
 }
 
-.markdown-body p+p {
+.markdown-body p + p {
   margin-top: 1.25em;
 }
 
@@ -719,7 +734,7 @@
 
 /* Inline Code */
 .markdown-body .inline-code {
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
   font-size: 0.875em;
   background: var(--color-code-bg);
   color: var(--color-code-text);
@@ -760,7 +775,7 @@
 }
 
 .code-block-lang {
-  font-family: 'Cascadia Code', monospace;
+  font-family: "Cascadia Code", monospace;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -827,7 +842,7 @@
   font-size: 0.875em;
   line-height: 1.6;
   border: none;
-  font-family: 'Cascadia Code', 'Fira Code', monospace;
+  font-family: "Cascadia Code", "Fira Code", monospace;
 }
 
 /* ===== Lists ===== */
@@ -841,13 +856,13 @@
   list-style: none;
 }
 
-.markdown-body ul>li {
+.markdown-body ul > li {
   position: relative;
 }
 
 /* Custom bullet points */
-.markdown-body ul>li::before {
-  content: '';
+.markdown-body ul > li::before {
+  content: "";
   position: absolute;
   left: -1.25em;
   top: 0.65em;
@@ -863,13 +878,13 @@
   counter-reset: ol-counter;
 }
 
-.markdown-body ol>li {
+.markdown-body ol > li {
   position: relative;
   counter-increment: ol-counter;
 }
 
-.markdown-body ol>li::before {
-  content: counter(ol-counter) '.';
+.markdown-body ol > li::before {
+  content: counter(ol-counter) ".";
   position: absolute;
   left: -1.75em;
   width: 1.5em;
@@ -883,12 +898,12 @@
   line-height: 1.65;
 }
 
-.markdown-body li>p {
+.markdown-body li > p {
   margin: 0.5em 0;
 }
 
-.markdown-body li>ul,
-.markdown-body li>ol {
+.markdown-body li > ul,
+.markdown-body li > ol {
   margin: 0.5em 0;
 }
 
@@ -902,14 +917,14 @@
 }
 
 /* Nested bullet variations */
-.markdown-body ul ul>li::before {
+.markdown-body ul ul > li::before {
   width: 5px;
   height: 5px;
   background: transparent;
   border: 1.5px solid var(--color-text-secondary);
 }
 
-.markdown-body ul ul ul>li::before {
+.markdown-body ul ul ul > li::before {
   width: 5px;
   height: 5px;
   border-radius: 0;
@@ -949,7 +964,7 @@
 }
 
 .markdown-body input[type="checkbox"]:checked::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 5px;
   top: 2px;
@@ -965,7 +980,10 @@
 }
 
 /* Checked item text styling */
-.markdown-body .task-list-item.contains-task-list input[type="checkbox"]:checked+span,
+.markdown-body
+  .task-list-item.contains-task-list
+  input[type="checkbox"]:checked
+  + span,
 .markdown-body li:has(input[type="checkbox"]:checked) {
   color: var(--color-text-muted);
 }
@@ -983,7 +1001,7 @@
 
 /* Decorative top separator */
 .markdown-body blockquote::before {
-  content: '❖';
+  content: "❖";
   display: block;
   font-size: 1.5em;
   color: var(--color-accent);
@@ -993,7 +1011,7 @@
 
 /* Decorative bottom separator */
 .markdown-body blockquote::after {
-  content: '';
+  content: "";
   display: block;
   width: 60px;
   height: 2px;
@@ -1004,7 +1022,7 @@
 }
 
 .markdown-body blockquote p {
-  font-family: 'Merriweather', Georgia, serif;
+  font-family: "Merriweather", Georgia, serif;
   font-size: 1.25em;
   line-height: 1.6;
   font-style: italic;
@@ -1014,7 +1032,7 @@
 
 /* Large hanging quotes */
 .markdown-body blockquote p:first-of-type::before {
-  content: '“';
+  content: "“";
   font-family: Georgia, serif;
   font-size: 3em;
   line-height: 0;
@@ -1025,7 +1043,7 @@
 }
 
 .markdown-body blockquote p:last-of-type::after {
-  content: '”';
+  content: "”";
   font-family: Georgia, serif;
   font-size: 3em;
   line-height: 0;
@@ -1037,7 +1055,7 @@
 
 /* Citation styling - Elegant footer */
 .markdown-body blockquote p:last-child:has(em) {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.85em;
   color: var(--color-text-secondary);
   font-style: normal;
@@ -1084,11 +1102,13 @@
 .markdown-body hr {
   border: none;
   height: 2px;
-  background: linear-gradient(90deg,
-      transparent,
-      var(--color-border) 20%,
-      var(--color-border) 80%,
-      transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-border) 20%,
+    var(--color-border) 80%,
+    transparent
+  );
   margin: 2.5em 0;
 }
 
@@ -1184,10 +1204,12 @@
 .markdown-body .skeleton-shimmer {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg,
-      transparent,
-      var(--color-bg-elevated) 50%,
-      transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-bg-elevated) 50%,
+    transparent
+  );
   animation: shimmer 1.5s infinite;
 }
 
@@ -1264,7 +1286,7 @@
     flex-direction: column !important;
   }
 
-  .split-container>div {
+  .split-container > div {
     width: 100% !important;
     height: 50% !important;
   }
