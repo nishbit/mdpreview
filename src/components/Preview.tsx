@@ -1,9 +1,6 @@
-import { useState, useCallback, useRef, useEffect } from 'react';
+import { useState, useCallback, useRef, useEffect, memo } from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useTheme } from '../context/ThemeContext';
 import { useScrollSync } from '../context/ScrollSyncContext';
 import CopyButton from './CopyButton';
@@ -12,6 +9,83 @@ import type { ComponentPropsWithoutRef } from 'react';
 interface PreviewProps {
     content: string;
 }
+
+// Lazy-loaded code block with syntax highlighting
+const LazyCodeBlock = memo(function LazyCodeBlock({ 
+    code, 
+    language, 
+    theme 
+}: { 
+    code: string; 
+    language: string; 
+    theme: 'light' | 'dark';
+}) {
+    const [Highlighter, setHighlighter] = useState<any>(null);
+    const [style, setStyle] = useState<any>(null);
+
+    useEffect(() => {
+        let mounted = true;
+        
+        // Dynamically import syntax highlighter only when needed
+        Promise.all([
+            import('react-syntax-highlighter/dist/esm/light'),
+            import('react-syntax-highlighter/dist/esm/styles/hljs'),
+            import('react-syntax-highlighter/dist/esm/languages/hljs/javascript'),
+            import('react-syntax-highlighter/dist/esm/languages/hljs/typescript'),
+            import('react-syntax-highlighter/dist/esm/languages/hljs/python'),
+            import('react-syntax-highlighter/dist/esm/languages/hljs/css'),
+            import('react-syntax-highlighter/dist/esm/languages/hljs/bash'),
+            import('react-syntax-highlighter/dist/esm/languages/hljs/json'),
+            import('react-syntax-highlighter/dist/esm/languages/hljs/xml'),
+        ]).then(([light, styles, js, ts, py, css, bash, json, xml]) => {
+            if (!mounted) return;
+            
+            const { Light } = light;
+            Light.registerLanguage('javascript', js.default);
+            Light.registerLanguage('js', js.default);
+            Light.registerLanguage('typescript', ts.default);
+            Light.registerLanguage('ts', ts.default);
+            Light.registerLanguage('python', py.default);
+            Light.registerLanguage('css', css.default);
+            Light.registerLanguage('bash', bash.default);
+            Light.registerLanguage('shell', bash.default);
+            Light.registerLanguage('json', json.default);
+            Light.registerLanguage('html', xml.default);
+            Light.registerLanguage('xml', xml.default);
+            
+            setHighlighter(() => Light);
+            setStyle(theme === 'dark' ? styles.atomOneDark : styles.atomOneLight);
+        });
+        
+        return () => { mounted = false; };
+    }, [theme]);
+
+    // Show plain code while loading
+    if (!Highlighter || !style) {
+        return (
+            <pre className="syntax-highlighter" style={{ margin: 0, padding: '1em', fontSize: '0.875em' }}>
+                <code>{code}</code>
+            </pre>
+        );
+    }
+
+    return (
+        <Highlighter
+            style={style}
+            language={language}
+            PreTag="div"
+            className="syntax-highlighter"
+            customStyle={{
+                margin: 0,
+                padding: '1em',
+                fontSize: '0.875em',
+                background: 'transparent',
+            }}
+        >
+            {code}
+        </Highlighter>
+    );
+});
 
 // Code block copy button
 function CodeCopyButton({ code }: { code: string }) {
@@ -135,20 +209,11 @@ function Preview({ content }: PreviewProps) {
                                             <span className="code-block-lang">{match[1]}</span>
                                             <CodeCopyButton code={codeString} />
                                         </div>
-                                        <SyntaxHighlighter
-                                            style={theme === 'dark' ? oneDark : oneLight}
-                                            language={match[1]}
-                                            PreTag="div"
-                                            className="syntax-highlighter"
-                                            customStyle={{
-                                                margin: 0,
-                                                padding: '1em',
-                                                fontSize: '0.875em',
-                                                background: 'transparent',
-                                            }}
-                                        >
-                                            {codeString}
-                                        </SyntaxHighlighter>
+                                        <LazyCodeBlock 
+                                            code={codeString} 
+                                            language={match[1]} 
+                                            theme={theme} 
+                                        />
                                     </div>
                                 );
                             }
