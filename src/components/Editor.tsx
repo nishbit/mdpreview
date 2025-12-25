@@ -34,7 +34,7 @@ function Editor({ value, onChange }: EditorProps) {
   return (
     <div className="editor-container">
       <div className="panel-header">
-        <span className="panel-title">Scriptorium</span>
+        <span className="panel-title">Script</span>
       </div>
       <div className="editor-content">
         <div className="line-numbers" ref={lineNumbersRef}>

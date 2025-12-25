@@ -304,7 +304,7 @@ function App() {
           <button
             className={`view-mode-btn ${viewMode === 'preview' ? 'active' : ''}`}
             onClick={() => changeViewMode('preview')}
-            title="The Looking Glass — Preview only (Ctrl+Shift+P)"
+            title="Preview only (Ctrl+Shift+P)"
             aria-label="Preview only"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">

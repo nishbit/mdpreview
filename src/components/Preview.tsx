@@ -174,7 +174,7 @@ function Preview({ content }: PreviewProps) {
     return (
         <div className="preview-container">
             <div className="panel-header">
-                <span className="panel-title">Looking Glass</span>
+                <span className="panel-title">Preview</span>
                 <CopyButton text={content} />
             </div>
             <div
