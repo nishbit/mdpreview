@@ -181,6 +181,7 @@ Now go forth and format.
 
 const STORAGE_KEY = 'mdpreview-split-sizes';
 const VIEW_MODE_KEY = 'mdpreview-view-mode';
+const MARKDOWN_KEY = 'mdpreview-markdown-content';
 const DEFAULT_SIZES = [50, 50];
 
 type ViewMode = 'split' | 'editor' | 'preview';
@@ -212,8 +213,21 @@ function getSavedViewMode(): ViewMode {
   return 'split';
 }
 
+function getSavedMarkdown(): string {
+  try {
+    const saved = localStorage.getItem(MARKDOWN_KEY);
+    // Handle empty state: if nothing saved or empty string, use default
+    if (saved !== null && saved.trim() !== '') {
+      return saved;
+    }
+  } catch (e) {
+    console.error('Failed to load markdown content:', e);
+  }
+  return defaultMarkdown;
+}
+
 function App() {
-  const [markdown, setMarkdown] = useState(defaultMarkdown);
+  const [markdown, setMarkdown] = useState(getSavedMarkdown);
   const [sizes, setSizes] = useState<number[]>(getSavedSizes);
   const [viewMode, setViewMode] = useState<ViewMode>(getSavedViewMode);
   const { theme, toggleTheme } = useTheme();
@@ -267,10 +281,23 @@ function App() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [changeViewMode]);
 
+  // Save markdown content to localStorage with debouncing
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      try {
+        localStorage.setItem(MARKDOWN_KEY, markdown);
+      } catch (e) {
+        console.error('Failed to save markdown content:', e);
+      }
+    }, 500); // 500ms debounce
+
+    return () => clearTimeout(timeoutId);
+  }, [markdown]);
+
   return (
     <div className="app">
       <header className="app-header">
-        <h1 className="app-title">    
+        <h1 className="app-title">
           <span className="logo-text">Markdown Preview</span>
         </h1>
         <Stats content={markdown} />
