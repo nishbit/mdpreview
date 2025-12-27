@@ -185,6 +185,7 @@ const MARKDOWN_KEY = 'mdpreview-markdown-content';
 const DEFAULT_SIZES = [50, 50];
 
 type ViewMode = 'split' | 'editor' | 'preview';
+type SaveStatus = 'idle' | 'saving' | 'saved' | 'error';
 
 function getSavedSizes(): number[] {
   try {
@@ -230,6 +231,8 @@ function App() {
   const [markdown, setMarkdown] = useState(getSavedMarkdown);
   const [sizes, setSizes] = useState<number[]>(getSavedSizes);
   const [viewMode, setViewMode] = useState<ViewMode>(getSavedViewMode);
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>('idle');
+  const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const { theme, toggleTheme } = useTheme();
   const { syncEnabled, toggleSync } = useScrollSync();
 
@@ -283,16 +286,34 @@ function App() {
 
   // Save markdown content to localStorage with debouncing
   useEffect(() => {
+    setSaveStatus('saving');
+
     const timeoutId = setTimeout(() => {
       try {
         localStorage.setItem(MARKDOWN_KEY, markdown);
+        setSaveStatus('saved');
+        setLastSaved(new Date());
+
+        // Reset to idle after 2 seconds
+        setTimeout(() => setSaveStatus('idle'), 2000);
       } catch (e) {
         console.error('Failed to save markdown content:', e);
+        // Handle quota exceeded error
+        if (e instanceof DOMException && e.name === 'QuotaExceededError') {
+          setSaveStatus('error');
+        } else {
+          setSaveStatus('error');
+        }
       }
-    }, 500); // 500ms debounce
+    }, 1000); // 1s debounce
 
     return () => clearTimeout(timeoutId);
   }, [markdown]);
+
+  // Clear content handler
+  const clearContent = useCallback(() => {
+    setMarkdown('');
+  }, []);
 
   return (
     <div className="app">
@@ -379,12 +400,12 @@ function App() {
           direction="horizontal"
           cursor="col-resize"
         >
-          <Editor value={markdown} onChange={setMarkdown} />
+          <Editor value={markdown} onChange={setMarkdown} saveStatus={saveStatus} lastSaved={lastSaved} onClear={clearContent} />
           <Preview content={markdown} />
         </Split>
       ) : (
         <main className="app-main single-view">
-          {viewMode === 'editor' && <Editor value={markdown} onChange={setMarkdown} />}
+          {viewMode === 'editor' && <Editor value={markdown} onChange={setMarkdown} saveStatus={saveStatus} lastSaved={lastSaved} onClear={clearContent} />}
           {viewMode === 'preview' && <Preview content={markdown} />}
         </main>
       )}
