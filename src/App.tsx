@@ -153,7 +153,7 @@ def is_it_a_bug_or_a_feature(behavior):
 
 ## Links & Such
 
-Behold, a [link that goes somewhere](https://example.com), and here's some \`inline code\` for when thou needst to reference \`const enlightenment = true\`.
+Behold, a [link that goes somewhere](https://youtu.be/dQw4w9WgXcQ), and here's some \`inline code\` for when thou needst to reference \`const enlightenment = true\`.
 
 ---
 
